@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Careers — Gomes Aiara Continuity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+/* ─── RESET & TOKENS ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+:root {
+  --blue:   #0055ff;
+  --black:  #0a0a0a;
+  --grey1:  #1a1a1a;
+  --grey2:  #444;
+  --grey3:  #767676;
+  --grey4:  #b0b0b0;
+  --grey5:  #e8e8e8;
+  --grey6:  #f4f4f4;
+  --white:  #ffffff;
+  --border: #e0e0e0;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--white);
+  color: var(--black);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  height: 56px;
+  display: flex; align-items: center;
+  padding: 0 32px;
+  justify-content: space-between;
+}
+.nav-left { display: flex; align-items: center; gap: 40px; }
+.nav-logo {
+  font-size: 22px; font-weight: 900;
+  color: var(--blue); text-decoration: none;
+  letter-spacing: -0.03em; line-height: 1;
+}
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  font-size: 13px; font-weight: 500; color: var(--grey2);
+  text-decoration: none; letter-spacing: 0;
+  transition: color .15s;
+}
+.nav-links a:hover { color: var(--black); }
+.nav-links a.active { color: var(--blue); font-weight: 600; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-icon { color: var(--grey3); cursor: pointer; display: flex; align-items: center; }
+.nav-icon:hover { color: var(--black); }
+
+/* ─── HERO ─── */
+.hero {
+  margin-top: 56px;
+  background: #e8f0ff;
+  min-height: 72vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+.hero-left {
+  padding: clamp(60px, 8vw, 100px) 32px clamp(60px,8vw,100px) 32px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; z-index: 2;
+}
+.hero-tag {
+  font-size: 11px; font-weight: 600; color: var(--grey3);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-size: clamp(52px, 7vw, 88px);
+  font-weight: 900; line-height: 0.95;
+  letter-spacing: -0.04em; color: var(--black);
+  margin-bottom: 24px;
+}
+.hero-desc {
+  font-size: 16px; font-weight: 400;
+  color: var(--grey2); line-height: 1.65;
+  max-width: 400px; margin-bottom: 32px;
+}
+.hero-readmore {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 600; color: var(--blue);
+  text-decoration: none; cursor: pointer; background: none; border: none;
+}
+.hero-readmore:hover { text-decoration: underline; }
+.hero-readmore svg { transition: transform .2s; }
+.hero-readmore:hover svg { transform: translateX(3px); }
+
+.hero-right {
+  position: relative;
+  background: url('https://images.unsplash.com/photo-1513828583688-c52646db42da?w=900&q=80') center/cover no-repeat;
+}
+.hero-right::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to right, #e8f0ff 0%, transparent 30%);
+}
+
+/* stats box */
+.hero-stats-box {
+  position: absolute; bottom: 32px; right: 32px; z-index: 3;
+  background: var(--blue); color: var(--white);
+  padding: 24px 28px; min-width: 280px;
+}
+.hsb-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 18px; opacity: .85; }
+.hsb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
+.hsb-item {}
+.hsb-item .key { font-size: 11px; opacity: .7; margin-bottom: 4px; }
+.hsb-item .val { font-size: 28px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+.hsb-sep { grid-column: 1/-1; height: 1px; background: rgba(255,255,255,.2); margin: 4px 0; }
+
+/* ─── TICKER STRIP ─── */
+.strip {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden; padding: 10px 0;
+  background: var(--white);
+}
+.strip-track { display: flex; width: max-content; animation: strip 40s linear infinite; }
+@keyframes strip { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.strip-item {
+  padding: 0 28px; white-space: nowrap;
+  font-size: 11px; font-weight: 600; color: var(--grey3);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 12px;
+}
+.strip-dot { color: var(--blue); font-size: 6px; }
+
+/* ─── GENERIC SECTION ─── */
+.section { padding: clamp(48px,6vw,80px) 32px; }
+.section + .section { border-top: 1px solid var(--border); }
+.s-grey { background: var(--grey6); }
+.s-blue { background: var(--blue); color: var(--white); }
+.s-black { background: var(--black); color: var(--white); }
+
+.section-label {
+  font-size: 11px; font-weight: 600; color: var(--grey3);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-size: clamp(28px, 3.5vw, 44px); font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1.05;
+  color: var(--black); margin-bottom: 16px;
+}
+.s-blue .section-title, .s-black .section-title { color: var(--white); }
+.section-body {
+  font-size: 15px; font-weight: 400; color: var(--grey2);
+  line-height: 1.7; max-width: 520px;
+}
+.s-blue .section-body { color: rgba(255,255,255,.75); }
+.s-black .section-body { color: rgba(255,255,255,.6); }
+
+.section-header-row {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 24px;
+  margin-bottom: 40px; flex-wrap: wrap;
+}
+.view-all {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600; color: var(--blue);
+  text-decoration: none; white-space: nowrap; flex-shrink: 0;
+  margin-top: 8px;
+}
+.view-all:hover { text-decoration: underline; }
+
+/* ─── WHY — CARD GRID ─── */
+.why-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+  max-width: 1200px;
+}
+.why-card {
+  background: var(--white);
+  padding: 36px 28px;
+  border-top: 3px solid transparent;
+  transition: border-color .2s, background .2s;
+}
+.why-card:hover { border-top-color: var(--blue); background: var(--grey6); }
+.wc-num { font-size: 11px; font-weight: 700; color: var(--blue); margin-bottom: 16px; }
+.wc-title { font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 8px; letter-spacing: -0.01em; }
+.wc-body { font-size: 14px; font-weight: 400; color: var(--grey2); line-height: 1.65; }
+
+/* ─── JOBS ─── */
+.jobs-layout {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 220px 1fr;
+  gap: 40px; align-items: start;
+}
+/* sidebar */
+.sidebar { position: sticky; top: 72px; }
+.sb-section { margin-bottom: 2px; border: 1px solid var(--border); background: var(--white); }
+.sb-section + .sb-section { border-top: none; }
+.sb-head {
+  padding: 10px 14px;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--grey3); border-bottom: 1px solid var(--border);
+  background: var(--grey6);
+}
+.search-wrap { display: flex; align-items: center; gap: 8px; padding: 10px 14px; }
+.search-wrap svg { color: var(--grey4); flex-shrink: 0; }
+.search-wrap input {
+  border: none; outline: none; width: 100%;
+  font-family: 'Inter', sans-serif; font-size: 13px;
+  color: var(--black); background: transparent;
+}
+.search-wrap input::placeholder { color: var(--grey4); }
+.flist { }
+.fi {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 14px; cursor: pointer; border: none; background: transparent;
+  width: 100%; text-align: left; font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 400; color: var(--grey2);
+  transition: background .12s; border-left: 2px solid transparent;
+}
+.fi:hover { background: var(--grey6); color: var(--black); }
+.fi.on { color: var(--blue); font-weight: 600; border-left-color: var(--blue); background: #f0f5ff; }
+.fi.on .fc { background: var(--blue); color: var(--white); }
+.fc {
+  font-size: 10px; font-weight: 700; background: var(--grey6);
+  color: var(--grey3); padding: 2px 7px; border-radius: 20px;
+}
+
+/* jobs main */
+.jobs-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
+}
+.jct { font-size: 13px; color: var(--grey3); }
+.jct strong { color: var(--black); font-weight: 700; }
+.atags { display: flex; gap: 6px; flex-wrap: wrap; }
+.atag {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: #e8f0ff; color: var(--blue);
+  font-size: 11px; font-weight: 600; padding: 3px 10px;
+  border: 1px solid rgba(0,85,255,.2);
+}
+.atag-x { cursor: pointer; font-size: 14px; line-height: 1; opacity: .6; }
+.atag-x:hover { opacity: 1; }
+
+/* job cards — IEA list style */
+.jlist { border: 1px solid var(--border); }
+.jcard {
+  padding: 28px 28px; cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 24px; align-items: start;
+  background: var(--white);
+  border-left: 3px solid transparent;
+  transition: border-left-color .15s, background .15s;
+}
+.jcard:last-child { border-bottom: none; }
+.jcard:hover { border-left-color: var(--blue); background: #fafcff; }
+.jc-meta {
+  font-size: 11px; font-weight: 600; color: var(--blue);
+  letter-spacing: 0.04em; text-transform: uppercase;
+  margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
+}
+.jc-sep { color: var(--grey4); font-weight: 300; }
+.jc-dept { color: var(--grey3); font-weight: 500; text-transform: none; letter-spacing: 0; }
+.jc-title {
+  font-size: 20px; font-weight: 700; color: var(--black);
+  letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 8px;
+  transition: color .15s;
+}
+.jcard:hover .jc-title { color: var(--blue); }
+.jc-xp {
+  font-size: 14px; font-weight: 400; color: var(--grey2);
+  line-height: 1.65; max-width: 520px; margin-bottom: 14px;
+}
+.jc-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.jc-tag {
+  font-size: 11px; font-weight: 500; color: var(--grey3);
+  background: var(--grey6); padding: 3px 10px;
+  border: 1px solid var(--border);
+}
+.jc-right {
+  display: flex; flex-direction: column;
+  align-items: flex-end; gap: 8px; padding-top: 2px;
+}
+.b-new {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.08em;
+  text-transform: uppercase; background: var(--blue);
+  color: var(--white); padding: 3px 9px;
+}
+.b-type {
+  font-size: 11px; font-weight: 600; color: var(--grey3);
+  border: 1px solid var(--border); padding: 3px 10px;
+}
+.jc-btn {
+  font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
+  color: var(--blue); background: transparent;
+  border: 1px solid rgba(0,85,255,.35);
+  padding: 8px 16px; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  transition: background .15s, color .15s;
+  white-space: nowrap;
+}
+.jc-btn:hover { background: var(--blue); color: var(--white); border-color: var(--blue); }
+.no-res {
+  padding: 64px 28px; text-align: center;
+  border: 1px solid var(--border); display: none;
+}
+.no-res.show { display: block; }
+.no-res h3 { font-size: 20px; font-weight: 700; margin-bottom: 6px; color: var(--black); }
+.no-res p { font-size: 14px; color: var(--grey3); }
+
+/* ─── VALUES ─── */
+.val-grid {
+  display: grid; grid-template-columns: repeat(5,1fr);
+  gap: 1px; background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.15);
+  max-width: 1200px; margin-top: 40px;
+}
+.val-col {
+  padding: 32px 24px;
+  border-top: 2px solid transparent;
+  transition: border-top-color .2s, background .2s;
+}
+.val-col:hover { border-top-color: var(--white); background: rgba(255,255,255,.06); }
+.v-n { font-size: 11px; font-weight: 700; opacity: .45; margin-bottom: 12px; letter-spacing: 0.06em; }
+.v-name { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+.v-tag { font-size: 13px; font-style: italic; opacity: .65; line-height: 1.5; }
+
+/* ─── PHOTO CARDS (Why section alternative) ─── */
+.photo-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border); border: 1px solid var(--border);
+  max-width: 1200px; margin-top: 40px;
+}
+.photo-card {
+  background: var(--grey6);
+  overflow: hidden; cursor: pointer;
+  transition: background .2s;
+}
+.photo-card:hover { background: #e8f0ff; }
+.pc-img {
+  width: 100%; height: 180px;
+  background: #c8d8e8 center/cover no-repeat;
+  display: block;
+}
+.pc-body { padding: 24px 24px 28px; }
+.pc-title { font-size: 18px; font-weight: 700; color: var(--black); margin-bottom: 6px; letter-spacing: -0.02em; }
+.pc-text { font-size: 13px; font-weight: 400; color: var(--grey2); line-height: 1.6; }
+
+/* ─── CTA BAND ─── */
+.cta-band {
+  background: var(--blue); padding: 56px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+}
+.cta-band h2 {
+  font-size: clamp(24px, 3vw, 36px); font-weight: 800;
+  color: var(--white); letter-spacing: -0.03em; line-height: 1.15; max-width: 520px;
+}
+.btn-white {
+  background: var(--white); color: var(--blue); border: none; cursor: pointer;
+  padding: 14px 28px; font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 700;
+  display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none; transition: background .15s; white-space: nowrap;
+}
+.btn-white:hover { background: #e8f0ff; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--black); color: var(--white);
+  padding: clamp(48px,5vw,64px) 32px 32px;
+}
+.ft-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px; padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: 32px;
+}
+.ft-logo {
+  font-size: 28px; font-weight: 900; color: var(--white);
+  letter-spacing: -0.04em; text-decoration: none;
+  display: block; margin-bottom: 16px;
+}
+.ft-logo span { color: var(--blue); }
+.ft-brand p { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.7; max-width: 260px; }
+.ft-col h5 { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 16px; }
+.ft-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.ft-col ul a { font-size: 13px; color: rgba(255,255,255,.65); text-decoration: none; transition: color .15s; }
+.ft-col ul a:hover { color: var(--white); }
+.ft-btm { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.ft-btm p { font-size: 12px; color: rgba(255,255,255,.3); }
+
+/* ─── MODAL ─── */
+.overlay {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(0,0,0,.5);
+  display: none; align-items: center; justify-content: center; padding: 16px;
+}
+.overlay.open { display: flex; }
+.modal {
+  background: var(--white); width: 100%; max-width: 720px;
+  max-height: 92vh; overflow-y: auto;
+  animation: mIn .2s ease-out;
+  border-top: 4px solid var(--blue);
+}
+@keyframes mIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+.m-hd {
+  padding: 32px 32px 24px;
+  position: sticky; top: 0; background: var(--white);
+  border-bottom: 1px solid var(--border); z-index: 2;
+}
+.m-close {
+  position: absolute; top: 20px; right: 24px;
+  width: 32px; height: 32px; border: 1px solid var(--border);
+  background: var(--grey6); color: var(--grey3);
+  font-size: 16px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background .15s, color .15s;
+}
+.m-close:hover { background: var(--blue); color: var(--white); border-color: var(--blue); }
+.m-eyebrow { font-size: 11px; font-weight: 700; color: var(--blue); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+.m-title { font-size: 28px; font-weight: 800; color: var(--black); letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; padding-right: 40px; }
+.m-meta { display: flex; gap: 20px; flex-wrap: wrap; }
+.m-mi { font-size: 12px; color: var(--grey3); display: flex; align-items: center; gap: 5px; }
+.m-body { padding: 32px; }
+.m-body h4 {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--blue);
+  padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  margin-top: 28px; margin-bottom: 14px;
+}
+.m-body h4:first-child { margin-top: 0; }
+.m-body p { font-size: 14px; color: var(--grey2); line-height: 1.75; }
+.m-body ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.m-body ul li { font-size: 14px; color: var(--grey2); padding-left: 16px; position: relative; line-height: 1.65; }
+.m-body ul li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 1px; background: var(--blue); }
+.m-ft {
+  padding: 24px 32px 32px; border-top: 1px solid var(--border);
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+.btn-blue {
+  background: var(--blue); color: var(--white); border: none; cursor: pointer;
+  padding: 12px 24px; font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 700;
+  display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none; transition: opacity .15s;
+}
+.btn-blue:hover { opacity: .85; }
+.btn-outline {
+  background: transparent; color: var(--black);
+  border: 1px solid var(--border); cursor: pointer;
+  padding: 11px 24px; font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: background .15s;
+}
+.btn-outline:hover { background: var(--grey6); }
+/* apply form */
+.apply-sec { display: none; padding: 0 32px 32px; border-top: 1px solid var(--border); }
+.apply-sec.open { display: block; }
+.a-title { font-size: 20px; font-weight: 700; color: var(--black); margin: 24px 0 20px; letter-spacing: -0.02em; }
+.fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 0; }
+.fg { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+.fg label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey3); }
+.fg input, .fg textarea {
+  border: 1px solid var(--border); padding: 10px 12px;
+  font-family: 'Inter', sans-serif; font-size: 13px; color: var(--black);
+  outline: none; background: var(--grey6); width: 100%;
+  transition: border-color .15s, background .15s;
+}
+.fg input:focus, .fg textarea:focus { border-color: var(--blue); background: var(--white); }
+.fg input::placeholder, .fg textarea::placeholder { color: var(--grey4); }
+.fg textarea { resize: vertical; min-height: 88px; }
+.upload {
+  border: 1px dashed rgba(0,85,255,.3); padding: 20px; text-align: center;
+  cursor: pointer; transition: border-color .15s; background: #f0f5ff;
+}
+.upload:hover { border-color: var(--blue); }
+.upload p { font-size: 13px; color: var(--grey3); }
+.upload strong { color: var(--blue); }
+
+/* ─── SCROLL TOP ─── */
+.stbtn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 100;
+  width: 40px; height: 40px; background: var(--blue); color: var(--white);
+  border: none; cursor: pointer; font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: translateY(6px); transition: opacity .25s, transform .25s;
+}
+.stbtn.show { opacity: 1; transform: translateY(0); }
+.stbtn:hover { opacity: .8; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .jobs-layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+  .why-grid, .photo-cards { grid-template-columns: 1fr 1fr; }
+  .val-grid { grid-template-columns: repeat(3,1fr); }
+  .ft-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .why-grid { grid-template-columns: 1fr; }
+  .photo-cards { grid-template-columns: 1fr; }
+  .val-grid { grid-template-columns: 1fr 1fr; }
+  .ft-top { grid-template-columns: 1fr; gap: 32px; }
+  .fgrid { grid-template-columns: 1fr; }
+  .hero-stats-box { position: static; margin: 0 24px 32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav">
+  <div class="nav-left">
+    <a href="#" class="nav-logo">gac</a>
+    <ul class="nav-links">
+      <li><a href="#">About</a></li>
+      <li><a href="#">Operations</a></li>
+      <li><a href="#jobs" class="active">Careers</a></li>
+      <li><a href="#">Provinces</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <span class="nav-icon">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    </span>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Operação Centurião · Angola · 2026</div>
+    <h1>Build<br/>Angola's<br/>Continuity</h1>
+    <p class="hero-desc">Join the 95 professionals powering GAC's Field Engineering Framework — ensuring every engineer and executive deployed across Angola's Oil &amp; Gas sector is operational from day one.</p>
+    <a href="#jobs" class="hero-readmore">
+      View open positions
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stats-box">
+      <div class="hsb-label">Operação Centurião — At a glance</div>
+      <div class="hsb-grid">
+        <div class="hsb-item"><div class="key">Team members</div><div class="val">95</div></div>
+        <div class="hsb-item"><div class="key">Open roles</div><div class="val">10</div></div>
+        <div class="hsb-sep"></div>
+        <div class="hsb-item"><div class="key">Provinces</div><div class="val">5</div></div>
+        <div class="hsb-item"><div class="key">Deployments/mo</div><div class="val">100</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STRIP ═══ -->
+<div class="strip">
+  <div class="strip-track">
+    <div class="strip-item"><span class="strip-dot">◆</span>Oil &amp; Gas Logistics</div>
+    <div class="strip-item"><span class="strip-dot">◆</span>Luanda · Lobito · Lubango · Malanje · Soyo</div>
+    <div class="strip-item"><span class="strip-dot">◆</span>FCPA &amp; UK Bribery Act Compliant</div>
+    <div class="strip-item"><span class="strip-dot">◆</span>95% Angolan Workforce</div>
+    <div class="strip-item"><span class="strip-dot">◆</span>GAC Driver Academy</div>
+    <div class="strip-item"><span class="strip-dot">◆</span>International Medical + Medevac</div>
+    <div class="strip-item"><span class="strip-dot">◆</span>Total · Chevron · BP Partners</div>
+    <div class="strip-item"><span class="strip-dot">◆</span>ISO 37001 Anti-Bribery</div>
+    <div class="strip-item"><span class="strip-dot">◆</span>Oil &amp; Gas Logistics</div>
+    <div class="strip-item"><span class="strip-dot">◆</span>Luanda · Lobito · Lubango · Malanje · Soyo</div>
+    <div class="strip-item"><span class="strip-dot">◆</span>FCPA &amp; UK Bribery Act Compliant</div>
+    <div class="strip-item"><span class="strip-dot">◆</span>95% Angolan Workforce</div>
+    <div class="strip-item"><span class="strip-dot">◆</span>GAC Driver Academy</div>
+    <div class="strip-item"><span class="strip-dot">◆</span>International Medical + Medevac</div>
+    <div class="strip-item"><span class="strip-dot">◆</span>Total · Chevron · BP Partners</div>
+    <div class="strip-item"><span class="strip-dot">◆</span>ISO 37001 Anti-Bribery</div>
+  </div>
+</div>
+
+<!-- ═══ WHY GAC ═══ -->
+<section class="section" id="why">
+  <div class="section-header-row">
+    <div>
+      <div class="section-label">Why join us</div>
+      <h2 class="section-title">A company built<br/>on standards</h2>
+    </div>
+    <a href="#jobs" class="view-all">View all openings <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+  <div class="why-grid">
+    <div class="why-card"><div class="wc-num">01</div><div class="wc-title">GAC Academy</div><div class="wc-body">Defensive driving, first aid, VIP protocol and language certifications — fully funded from day one for all permanent roles.</div></div>
+    <div class="why-card"><div class="wc-num">02</div><div class="wc-title">Global Standards</div><div class="wc-body">Operate under FCPA, UK Bribery Act and ISO 37001 frameworks. Your profile gains credentials recognised worldwide.</div></div>
+    <div class="why-card"><div class="wc-num">03</div><div class="wc-title">Medevac Coverage</div><div class="wc-body">International medical insurance including full evacuation cover for every employee and their immediate family from month one.</div></div>
+    <div class="why-card"><div class="wc-num">04</div><div class="wc-title">Performance Rewards</div><div class="wc-body">Quarterly zero-incident bonuses, annual retention payments and a referral programme that compensates your results.</div></div>
+    <div class="why-card"><div class="wc-num">05</div><div class="wc-title">Safety First Culture</div><div class="wc-body">A dedicated HSE officer, 24/7 Control Centre support and rigorous protocols so every colleague goes home safely.</div></div>
+    <div class="why-card"><div class="wc-num">06</div><div class="wc-title">Built for Angola</div><div class="wc-body">95% Angolan workforce. We invest in local talent development across all five provinces — building long-term careers.</div></div>
+  </div>
+</section>
+
+<!-- ═══ JOBS ═══ -->
+<section class="section s-grey" id="jobs">
+  <div class="section-header-row">
+    <div>
+      <div class="section-label">Open positions</div>
+      <h2 class="section-title">Current openings</h2>
+      <p class="section-body">All roles form part of Operação Centurião — GAC's operational framework for Angola. We are building the most professional continuity team in the country.</p>
+    </div>
+  </div>
+
+  <div class="jobs-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sb-section">
+        <div class="sb-head">Search</div>
+        <div class="search-wrap">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="searchInput" placeholder="Job title, keyword…"/>
+        </div>
+      </div>
+      <div class="sb-section">
+        <div class="sb-head">Province</div>
+        <div class="flist">
+          <button class="fi on" data-f="prov" data-v="all">All provinces <span class="fc">10</span></button>
+          <button class="fi" data-f="prov" data-v="Luanda">Luanda <span class="fc">2</span></button>
+          <button class="fi" data-f="prov" data-v="Lobito">Lobito <span class="fc">2</span></button>
+          <button class="fi" data-f="prov" data-v="Lubango">Lubango <span class="fc">2</span></button>
+          <button class="fi" data-f="prov" data-v="Malanje">Malanje <span class="fc">2</span></button>
+          <button class="fi" data-f="prov" data-v="Soyo">Soyo <span class="fc">2</span></button>
+        </div>
+      </div>
+      <div class="sb-section">
+        <div class="sb-head">Role type</div>
+        <div class="flist">
+          <button class="fi on" data-f="role" data-v="all">All roles <span class="fc">10</span></button>
+          <button class="fi" data-f="role" data-v="driver">Professional Driver <span class="fc">5</span></button>
+          <button class="fi" data-f="role" data-v="greet">Meet &amp; Greet <span class="fc">5</span></button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- LIST -->
+    <div>
+      <div class="jobs-toolbar">
+        <p class="jct">Showing <strong id="jct">10</strong> positions</p>
+        <div class="atags" id="atags"></div>
+      </div>
+      <div class="jlist" id="jlist"></div>
+      <div class="no-res" id="noRes">
+        <h3>No positions found</h3>
+        <p>Try adjusting your filters or search terms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VALUES ═══ -->
+<section class="section s-black" id="values">
+  <div class="section-label" style="color:rgba(255,255,255,.4)">Our culture</div>
+  <h2 class="section-title" style="color:var(--white);margin-bottom:8px">The GAC Standard</h2>
+  <p class="section-body" style="color:rgba(255,255,255,.55)">Five values lived every day — in our Control Centre, in every vehicle, across every province.</p>
+  <div class="val-grid">
+    <div class="val-col"><div class="v-n">01</div><div class="v-name">Integrity</div><div class="v-tag">"We build trust through transparent actions, visible and invisible."</div></div>
+    <div class="val-col"><div class="v-n">02</div><div class="v-name">Courtesy of Time</div><div class="v-tag">"Punctuality is the highest expression of respect."</div></div>
+    <div class="val-col"><div class="v-n">03</div><div class="v-name">Culture of Care</div><div class="v-tag">"Every journey must end as planned: without incidents."</div></div>
+    <div class="val-col"><div class="v-n">04</div><div class="v-name">Operational Mastery</div><div class="v-tag">"Every kilometre reflects our standard."</div></div>
+    <div class="val-col"><div class="v-n">05</div><div class="v-name">Discretion</div><div class="v-tag">"Discretion protects those who trust us."</div></div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<div class="cta-band">
+  <h2>Don't see the right role?<br/>Send us your profile.</h2>
+  <button class="btn-white" onclick="openSpec()">
+    Submit speculative application
+    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </button>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="ft-top">
+    <div class="ft-brand">
+      <a href="#" class="ft-logo">g<span>a</span>c</a>
+      <p>Guaranteeing operational continuity for critical energy and infrastructure projects across Angola through precise human capital management.</p>
+    </div>
+    <div class="ft-col"><h5>Company</h5><ul><li><a href="#">About GAC</a></li><li><a href="#">Our Framework</a></li><li><a href="#">Ethics &amp; Conduct</a></li><li><a href="#">Local Content</a></li></ul></div>
+    <div class="ft-col"><h5>Careers</h5><ul><li><a href="#jobs">Open Positions</a></li><li><a href="#why">Benefits</a></li><li><a href="#values">Our Values</a></li><li><a href="#" onclick="openSpec()">Speculative CV</a></li></ul></div>
+    <div class="ft-col"><h5>Locations</h5><ul><li><a href="#">Luanda — HQ Talatona</a></li><li><a href="#">Lobito</a></li><li><a href="#">Lubango</a></li><li><a href="#">Malanje</a></li><li><a href="#">Soyo</a></li></ul></div>
+  </div>
+  <div class="ft-btm">
+    <p>© 2026 Gomes Aiara Continuity, LDA. All rights reserved.</p>
+    <p>careers.gomesaiara.com</p>
+  </div>
+</footer>
+
+<!-- ═══ MODAL ═══ -->
+<div class="overlay" id="overlay" onclick="handleOv(event)">
+  <div class="modal">
+    <div class="m-hd">
+      <button class="m-close" onclick="closeM()">✕</button>
+      <div class="m-eyebrow" id="mEyebrow"></div>
+      <h2 class="m-title" id="mTitle"></h2>
+      <div class="m-meta" id="mMeta"></div>
+    </div>
+    <div class="m-body" id="mBody"></div>
+    <div class="m-ft">
+      <button class="btn-blue" onclick="toggleApply()">Apply now <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+      <button class="btn-outline" onclick="closeM()">Close</button>
+    </div>
+    <div class="apply-sec" id="applySec">
+      <h3 class="a-title">Submit your application</h3>
+      <div class="fgrid">
+        <div class="fg"><label>First name *</label><input type="text" placeholder="João"/></div>
+        <div class="fg"><label>Last name *</label><input type="text" placeholder="Silva"/></div>
+      </div>
+      <div class="fgrid">
+        <div class="fg"><label>Email address *</label><input type="email" placeholder="joao@example.com"/></div>
+        <div class="fg"><label>Phone number *</label><input type="tel" placeholder="+244 9XX XXX XXX"/></div>
+      </div>
+      <div class="fg"><label>Nationality</label><input type="text" placeholder="Angolan"/></div>
+      <div class="fg"><label>Cover letter</label><textarea placeholder="Tell us why you're the right person for this role…"></textarea></div>
+      <div class="fg">
+        <label>Upload CV / résumé</label>
+        <div class="upload" onclick="document.getElementById('cvf').click()">
+          <input type="file" id="cvf" style="display:none" accept=".pdf,.doc,.docx"/>
+          <p>Drag &amp; drop or <strong>click to upload</strong><br/>PDF · DOC · DOCX · Max 5MB</p>
+        </div>
+      </div>
+      <button class="btn-blue" onclick="submitApp()">Submit application <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<button class="stbtn" id="stbtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const JOBS=[
+  {id:1,title:"Professional Driver — GAC PRIME",province:"Luanda",type:"driver",dept:"Mobility & Fleet",contract:"Full-Time · Permanent",excerpt:"Operate high-specification SUVs across Luanda, ensuring safe, punctual and discreet transportation of senior engineers and executives for Tier 1 energy clients.",tags:["VIP Protocol","Defensive Driving","24/7 Availability","English Preferred"],isNew:true,
+  body:`<h4>About the role</h4><p>As a GAC PRIME Professional Driver based in Luanda, you will be responsible for the safe and professional transportation of engineers, technical specialists and executives in Angola's Oil &amp; Gas sector, operating within the GAC Control Centre framework with full GPS telemetry oversight and 24/7 support.</p><h4>Key responsibilities</h4><ul><li>Execute daily transportation assignments issued via GAC's Control Centre (CCG)</li><li>Maintain vehicle in Zona Verde operational condition — daily checks mandatory</li><li>Adhere to all GAC route protocols, geofencing zones and rest period regulations</li><li>Apply defensive driving and VIP protocol at all times</li><li>Communicate all incidents and deviations to CCG immediately via VHF radio</li><li>Complete digital expense reporting within 30 minutes of each transaction</li><li>Zero tolerance for alcohol, drugs and mobile phone use while driving</li></ul><h4>Requirements</h4><ul><li>Valid Angolan professional driving licence (Category B minimum)</li><li>Minimum 3 years professional driving experience</li><li>Clean criminal record (certificate required)</li><li>Basic English communication skills preferred</li><li>Familiarity with Luanda metropolitan area and access roads</li><li>Available for rotating shifts including nights and weekends</li></ul><h4>What GAC offers</h4><ul><li>Competitive salary with seniority premium from Year 2</li><li>Field per diem 45€/day when deployed outside Luanda</li><li>International medical insurance + Medevac coverage for family</li><li>GAC Driver Academy — defensive driving, first aid, VIP protocol</li><li>Quarterly zero-incident bonus + annual retention payment (50% monthly salary)</li><li>Uniform, equipment and access card from Day 1</li></ul>`},
+
+  {id:2,title:"Airport Meet & Greet Specialist",province:"Luanda",type:"greet",dept:"Customer Success",contract:"Full-Time · Permanent",excerpt:"Serve as the first GAC contact for arriving engineers and executives at Quatro de Fevereiro International Airport, delivering a seamless, professional welcome experience.",tags:["Bilingual PT/EN","VIP Hospitality","Immigration Liaison","Welcome Kit"],isNew:true,
+  body:`<h4>About the role</h4><p>The Airport Meet &amp; Greet Specialist is the face of GAC for every international arrival in Luanda. You will coordinate with the CCG, drivers and Legal Liaison to ensure zero-friction transitions from aircraft to accommodation or worksite, maintaining GAC's premium service standard at all times.</p><h4>Key responsibilities</h4><ul><li>Receive and escort arriving engineers and executives at Luanda International Airport</li><li>Coordinate with Immigration (SME) and assist with documentation queries on arrival</li><li>Deliver GAC Welcome Kit — SIM card, local briefing, emergency contacts, security manual</li><li>Liaise with assigned driver and CCG to confirm handover and route briefing</li><li>Handle arrival delays and unexpected situations calmly and professionally</li><li>Maintain accurate arrival logs per GAC data classification protocols</li></ul><h4>Requirements</h4><ul><li>Fluent Portuguese and English (French or Spanish a plus)</li><li>Minimum 2 years in hospitality, airline ground services or VIP assistance</li><li>Business formal appearance at all times</li><li>Excellent knowledge of Luanda airport procedures and protocols</li><li>Available for early morning and late-night arrival shifts</li></ul><h4>What GAC offers</h4><ul><li>Competitive salary with KPI performance variable</li><li>International medical insurance + Medevac for family</li><li>Full uniform and professional development training</li><li>GAC Customer Success pathway — progression to Senior Concierge</li><li>Annual retention bonus after 12 months continuous service</li></ul>`},
+
+  {id:3,title:"Professional Driver — GAC PRIME",province:"Lobito",type:"driver",dept:"Mobility & Fleet",contract:"Full-Time · Permanent",excerpt:"Support the growing infrastructure and port logistics sector in Lobito with safe, punctual driver services along the Benguela Corridor for engineering clients.",tags:["Benguela Corridor","4x4 Experience","Provincial Routes","HSE Protocols"],isNew:false,
+  body:`<h4>About the role</h4><p>GAC is expanding its Lobito operations to support infrastructure and energy projects along the Benguela Corridor — one of Africa's most strategic logistics axes. As a PRIME Professional Driver you will operate in both urban and inter-provincial environments.</p><h4>Key responsibilities</h4><ul><li>Transport engineering personnel safely throughout Lobito and Benguela Province</li><li>Execute inter-provincial routes as assigned by CCG with full route compliance</li><li>Maintain 4x4 SUV in optimal condition — daily pre-departure checks mandatory</li><li>Operate VHF communications and GPS tracking at all times during service</li><li>Report all incidents and road conditions to CCG within 15 minutes</li><li>Assist with basic vehicle recovery protocols in remote stretches</li></ul><h4>Requirements</h4><ul><li>Valid Angolan professional driving licence</li><li>Minimum 3 years professional driving — provincial routes preferred</li><li>4x4 vehicle operation experience required</li><li>Knowledge of Benguela Province road network</li><li>Clean criminal record</li></ul><h4>What GAC offers</h4><ul><li>Competitive base salary with 15% remote route danger premium</li><li>Per diem 45€/day on all out-of-base deployments</li><li>International medical insurance + Medevac for family</li><li>GAC Driver Academy full certification programme</li><li>Quarterly zero-incident performance bonus</li></ul>`},
+
+  {id:4,title:"Airport Meet & Greet Specialist",province:"Lobito",type:"greet",dept:"Customer Success",contract:"Full-Time · Permanent",excerpt:"Lead arrival coordination for engineering professionals at Lobito, delivering the full GAC welcome experience for teams deployed along the Benguela industrial corridor.",tags:["Bilingual PT/EN","Port & Air Arrivals","VIP Welcome","Logistics Coordination"],isNew:false,
+  body:`<h4>About the role</h4><p>Based in Lobito, you will coordinate arrivals for engineering teams accessing the Benguela Corridor industrial zone — one of Angola's fastest-growing infrastructure regions, anchored by the Port of Lobito and the Lobito Atlantic Railway.</p><h4>Key responsibilities</h4><ul><li>Coordinate reception at Lobito airport and port access points</li><li>Deliver GAC Welcome Kit and conduct initial local security briefing</li><li>Manage driver-passenger handover in coordination with CCG</li><li>Handle schedule changes and delays with professionalism</li><li>Build relationships with local airport, port and immigration officials</li></ul><h4>Requirements</h4><ul><li>Fluent Portuguese and professional English</li><li>2+ years in hospitality, VIP assistance or airport services</li><li>Strong knowledge of Lobito and Benguela Province logistics</li><li>Polished professional presentation at all times</li></ul><h4>What GAC offers</h4><ul><li>Competitive salary with NPS performance variable</li><li>International medical insurance + Medevac for family</li><li>Career development pathway towards Senior Concierge</li><li>Annual retention bonus after 12 months</li></ul>`},
+
+  {id:5,title:"Professional Driver — GAC PRIME",province:"Lubango",type:"driver",dept:"Mobility & Fleet",contract:"Full-Time · Permanent",excerpt:"Support engineering operations on the Lubango plateau, operating premium 4x4 vehicles on highland and inter-provincial routes in Huíla Province.",tags:["Highland Routes","4x4 Expert","Remote Deployments","Technical Transport"],isNew:false,
+  body:`<h4>About the role</h4><p>Lubango, situated on the Serra da Leba plateau at 1,700m, presents unique driving challenges. As a GAC PRIME Driver you will be an expert in highland terrain, operating with elevated autonomy as a trusted mobility partner for engineers in southern Angola.</p><h4>Key responsibilities</h4><ul><li>Operate 4x4 vehicles on highland, paved and unpaved routes across Huíla Province</li><li>Execute assigned missions from CCG with strict time compliance</li><li>Apply GAC security protocols in remote stretches with limited communication</li><li>Perform daily vehicle inspection and report mechanical issues immediately</li><li>Represent GAC's zero-bribery policy at all road controls</li></ul><h4>Requirements</h4><ul><li>Valid professional driving licence — Category B minimum</li><li>Extensive experience on highland and gravel routes</li><li>Minimum 4 years professional driving (southern Angola preferred)</li><li>Mechanical awareness for basic field recovery</li><li>Excellent knowledge of Lubango city and Huíla road network</li></ul><h4>What GAC offers</h4><ul><li>Competitive salary + 15% remote route danger premium</li><li>45€/day field per diem on all out-of-base deployments</li><li>International medical insurance + Medevac for family</li><li>Full GAC Driver Academy certification on joining</li><li>Quarterly zero-incident bonus + annual retention payment</li></ul>`},
+
+  {id:6,title:"Airport Meet & Greet Specialist",province:"Lubango",type:"greet",dept:"Customer Success",contract:"Full-Time · Permanent",excerpt:"Deliver professional meet & greet services for arriving technical personnel at Lubango, acting as the gateway to GAC's southern operations hub in Huíla Province.",tags:["Regional Airport","Southern Hub","PT/EN Bilingual","Client Relations"],isNew:false,
+  body:`<h4>About the role</h4><p>You will be GAC's on-the-ground service representative in Lubango, welcoming and orienting arriving professionals to one of Angola's key southern cities and ensuring the GAC standard is maintained from the moment of arrival.</p><h4>Key responsibilities</h4><ul><li>Receive engineering and technical teams at Lubango Regional Airport</li><li>Provide full GAC onboarding — Welcome Kit, local briefing, driver handover</li><li>Coordinate logistics with CCG and assigned vehicle crew</li><li>Monitor and communicate arrival/departure changes to CCG in real time</li><li>Develop local knowledge of accommodation and emergency services</li></ul><h4>Requirements</h4><ul><li>Fluent Portuguese, good English preferred</li><li>2+ years in reception, hospitality or VIP guest services</li><li>Strong local knowledge of Lubango city and province</li><li>Professional appearance and excellent interpersonal skills</li></ul><h4>What GAC offers</h4><ul><li>Competitive salary with quarterly KPI bonus</li><li>International medical insurance + Medevac for family</li><li>Professional development through GAC Academy</li><li>Annual 50% salary retention bonus after 12 months</li></ul>`},
+
+  {id:7,title:"Professional Driver — GAC PRIME",province:"Malanje",type:"driver",dept:"Mobility & Fleet",contract:"Full-Time · Permanent",excerpt:"Provide expert transportation in Malanje Province, supporting infrastructure engineering in interior Angola with professional, reliable 4x4 operations.",tags:["Interior Province","Long-Distance Routes","4x4 Specialist","Technical Support"],isNew:false,
+  body:`<h4>About the role</h4><p>Malanje Province is a critical inland node for Angola's infrastructure development. As a GAC PRIME Driver you will operate some of the most challenging interior routes in the country, requiring exceptional skill, resilience and strict adherence to GAC's safety protocols.</p><h4>Key responsibilities</h4><ul><li>Execute transportation assignments for engineering teams in Malanje and surrounding areas</li><li>Navigate interior provincial routes with a safety-first mindset</li><li>Maintain direct communication with CCG via VHF radio and GPS at all times</li><li>Carry and maintain emergency kit — first aid, recovery gear, satellite comms device</li><li>Apply GAC's zero-bribery protocol at all checkpoints and police controls</li></ul><h4>Requirements</h4><ul><li>Valid professional driving licence</li><li>5+ years professional driving including interior Angola routes</li><li>Expert 4x4 operation on unpaved roads</li><li>Basic vehicle mechanics for emergency field repairs</li><li>Knowledge of Malanje Province roads and communities</li></ul><h4>What GAC offers</h4><ul><li>Competitive base salary + 15% remote route danger premium</li><li>45€/day field per diem</li><li>International medical insurance + Medevac for family</li><li>GAC Driver Academy full certification</li><li>Quarterly performance bonus + annual retention payment</li></ul>`},
+
+  {id:8,title:"Airport Meet & Greet Specialist",province:"Malanje",type:"greet",dept:"Customer Success",contract:"Full-Time · Permanent",excerpt:"Act as GAC's frontline representative in Malanje, coordinating arrivals and managing the welcome experience for engineering professionals in interior Angola.",tags:["Interior Logistics","Client First Contact","Coordination Role","PT/EN Required"],isNew:false,
+  body:`<h4>About the role</h4><p>As GAC's Meet &amp; Greet Specialist in Malanje, you will be the critical link between arriving technical personnel and the GAC framework operating across interior Angola — a role requiring local expertise, calm professionalism and strong logistics awareness.</p><h4>Key responsibilities</h4><ul><li>Welcome and escort arriving personnel at Malanje Airport</li><li>Deliver Welcome Kit and comprehensive local security briefing</li><li>Coordinate seamlessly with CCG and assigned drivers for all transfers</li><li>Handle unexpected arrival scenarios with composure and efficiency</li><li>Build productive relationships with local airport and authority staff</li></ul><h4>Requirements</h4><ul><li>Fluent Portuguese and working English</li><li>2+ years in hospitality, reception or client-facing logistics</li><li>Deep local knowledge of Malanje Province</li><li>High level of personal organisation and discretion</li></ul><h4>What GAC offers</h4><ul><li>Competitive salary with performance variable</li><li>International medical insurance + Medevac for family</li><li>Professional development at GAC Academy</li><li>Annual 50% salary retention bonus after 12 months</li></ul>`},
+
+  {id:9,title:"Professional Driver — GAC PRIME",province:"Soyo",type:"driver",dept:"Mobility & Fleet",contract:"Full-Time · Permanent",excerpt:"Operate in Angola's premier Oil & Gas hub at Soyo, supporting the world's largest energy companies with expert VIP transportation along the Congo River delta routes.",tags:["Oil & Gas Zone","VIP Protocol","Delta Routes","ELITE Pathway"],isNew:true,
+  body:`<h4>About the role</h4><p>Soyo is the heartbeat of Angola's upstream Oil &amp; Gas industry, home to operations by Total, Chevron, BP and ENI. A GAC PRIME Driver in Soyo operates in one of Africa's most strategically important energy zones, demanding the highest standards of security awareness, discretion and VIP protocol.</p><h4>Key responsibilities</h4><ul><li>Transport senior engineers, executives and C-Suite guests for Tier 1 energy clients</li><li>Execute all missions with GAC ELITE-level professionalism — anticipate needs, stay discreet</li><li>Navigate Soyo delta routes, installation access roads and marine transfer points</li><li>Maintain SUV in immaculate Zona Verde condition at all times</li><li>Operate in full coordination with CCG — check-in every 30 minutes on active routes</li><li>Apply GAC anti-bribery protocol at all facility entry controls</li></ul><h4>Requirements</h4><ul><li>Valid professional driving licence with clean record</li><li>Minimum 4 years professional driving — Oil &amp; Gas installation access experience valued</li><li>Fluent Portuguese; English conversational ability strongly preferred</li><li>HSSE safety induction (or willingness to obtain)</li><li>Knowledge of Soyo town, delta routes and installation access protocols</li></ul><h4>What GAC offers</h4><ul><li>Premium salary reflecting Oil &amp; Gas zone + 15% danger premium</li><li>45€/day field per diem</li><li>International medical insurance + Medevac for family</li><li>Fast-track to GAC ELITE driver certification</li><li>Quarterly zero-incident bonus + annual retention payment</li></ul>`},
+
+  {id:10,title:"Airport Meet & Greet Specialist",province:"Soyo",type:"greet",dept:"Customer Success",contract:"Full-Time · Permanent",excerpt:"Serve as GAC's premium reception specialist in Soyo — Angola's oil capital — providing world-class arrival experiences for executives from the world's leading energy corporations.",tags:["Oil & Gas Hub","Executive Welcome","Bilingual Mandatory","Tier 1 Clients"],isNew:true,
+  body:`<h4>About the role</h4><p>Soyo demands the very best in client service. Your role places you at the interface between international energy corporations and GAC's operational excellence, welcoming C-Suite executives and senior engineers from Total, Chevron, BP and others.</p><h4>Key responsibilities</h4><ul><li>Receive and escort high-profile arrivals at Soyo Airport and marine transfer points</li><li>Deliver GAC ELITE-grade Welcome Kit with personalised local briefing</li><li>Coordinate with CCG, drivers and security escort teams for all transfers</li><li>Handle confidential passenger data with highest discretion (Nivel 1 classification)</li><li>Monitor and pre-empt client needs — the standard is anticipation, not reaction</li><li>Build strong relationships with Soyo airport and facility management</li></ul><h4>Requirements</h4><ul><li>Fluent Portuguese and fluent English (mandatory for this role)</li><li>3+ years in VIP hospitality, executive assistance or premium aviation services</li><li>Understanding of Oil &amp; Gas operational culture and client sensitivities</li><li>Impeccable personal presentation — business formal at all times</li><li>Flexibility across rotation cycles including early arrivals and weekends</li></ul><h4>What GAC offers</h4><ul><li>Premium salary + NPS performance variable</li><li>International medical insurance + Medevac for family</li><li>Fast-track to Senior Concierge and Account Manager roles</li><li>Full GAC Academy curriculum</li><li>Annual 50% retention bonus after 12 months</li></ul>`}
+];
+
+let fP='all', fR='all', fS='';
+
+function render() {
+  const list = document.getElementById('jlist');
+  const noR  = document.getElementById('noRes');
+  const ct   = document.getElementById('jct');
+  const items = JOBS.filter(j => {
+    if (fP !== 'all' && j.province !== fP) return false;
+    if (fR !== 'all' && j.type !== fR) return false;
+    const q = fS.toLowerCase();
+    if (q && !j.title.toLowerCase().includes(q) &&
+        !j.province.toLowerCase().includes(q) &&
+        !j.excerpt.toLowerCase().includes(q) &&
+        !j.tags.some(t => t.toLowerCase().includes(q))) return false;
+    return true;
+  });
+  ct.textContent = items.length;
+  if (!items.length) {
+    list.innerHTML = ''; list.style.display = 'none';
+    noR.classList.add('show');
+  } else {
+    list.style.display = 'block'; noR.classList.remove('show');
+    list.innerHTML = items.map(j => `
+      <div class="jcard" onclick="openJ(${j.id})">
+        <div>
+          <div class="jc-meta">
+            ${j.province}
+            <span class="jc-sep">—</span>
+            <span class="jc-dept">${j.dept}</span>
+          </div>
+          <h3 class="jc-title">${j.title}</h3>
+          <p class="jc-xp">${j.excerpt}</p>
+          <div class="jc-tags">${j.tags.map(t => `<span class="jc-tag">${t}</span>`).join('')}</div>
+        </div>
+        <div class="jc-right">
+          ${j.isNew ? '<span class="b-new">New</span>' : ''}
+          <span class="b-type">Full-Time</span>
+          <button class="jc-btn">View role <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>`).join('');
+  }
+  renderTags();
+}
+
+function renderTags() {
+  const el = document.getElementById('atags');
+  const ts = [];
+  if (fP !== 'all') ts.push({ l: fP, k: 'prov' });
+  if (fR !== 'all') ts.push({ l: fR === 'driver' ? 'Professional Driver' : 'Meet & Greet', k: 'role' });
+  if (fS) ts.push({ l: `"${fS}"`, k: 'srch' });
+  el.innerHTML = ts.map(t =>
+    `<span class="atag">${t.l}<span class="atag-x" onclick="clrF('${t.k}')">×</span></span>`
+  ).join('');
+}
+
+function clrF(k) {
+  if (k === 'prov') { fP = 'all'; document.querySelectorAll('[data-f="prov"]').forEach(b => b.classList.toggle('on', b.dataset.v === 'all')); }
+  if (k === 'role') { fR = 'all'; document.querySelectorAll('[data-f="role"]').forEach(b => b.classList.toggle('on', b.dataset.v === 'all')); }
+  if (k === 'srch') { fS = ''; document.getElementById('searchInput').value = ''; }
+  render();
+}
+
+document.querySelectorAll('.fi').forEach(b => {
+  b.addEventListener('click', () => {
+    const f = b.dataset.f, v = b.dataset.v;
+    document.querySelectorAll(`[data-f="${f}"]`).forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    if (f === 'prov') fP = v;
+    if (f === 'role') fR = v;
+    render();
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', e => {
+  fS = e.target.value.trim(); render();
+});
+
+function openJ(id) {
+  const j = JOBS.find(j => j.id === id);
+  document.getElementById('mEyebrow').textContent = `${j.province}  ·  ${j.dept}  ·  ${j.contract}`;
+  document.getElementById('mTitle').textContent = j.title;
+  document.getElementById('mMeta').innerHTML = `
+    <div class="m-mi"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>${j.province}, Angola</div>
+    <div class="m-mi"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>${j.contract}</div>`;
+  document.getElementById('mBody').innerHTML = j.body;
+  document.getElementById('applySec').classList.remove('open');
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeM() { document.getElementById('overlay').classList.remove('open'); document.body.style.overflow = ''; }
+function handleOv(e) { if (e.target === document.getElementById('overlay')) closeM(); }
+function toggleApply() {
+  const s = document.getElementById('applySec');
+  s.classList.toggle('open');
+  if (s.classList.contains('open')) s.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function submitApp() { alert('Thank you! Our team will review your profile and be in touch within 5 business days.\n\n— GAC Careers'); closeM(); }
+function openSpec() { alert('Please send your CV and cover letter to:\n\ncareers@gomesaiara.com\n\nSubject: Speculative Application — [Your Preferred Role]'); }
+
+window.addEventListener('scroll', () => {
+  document.getElementById('stbtn').classList.toggle('show', window.scrollY > 400);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeM(); });
+render();
+</script>
+</body>
+</html>
